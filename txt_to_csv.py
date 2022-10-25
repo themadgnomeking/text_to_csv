@@ -1,11 +1,16 @@
 from tkinter import *
 from tkinter import filedialog
+from tkinter import ttk
 from curses import window
 import pandas as pd
 from os.path import exists
 import csv
 import pandas
 
+root = Tk()
+root.geometry("700x350")
+
+style=ttk.Style(root)
 
 file_path = "D:\Projects\Python\data_conversion"
 
@@ -21,11 +26,11 @@ date = []
 
 def open_file():
     #open file from location selected
-    file_path = filedialog.askopenfilename(initialdir="D:\Projects\Python\data_conversion",
+    file_path = filedialog.askopenfilename(initialdir="D:\Projects\Python\data_conversion\data",
                                         title="Select a file", 
                                         filetypes=[("Text files","*.txt"), ("All files", "*.*")])
     ### original open filed
-    file = open(file_path, encoding="utf8") #opens file from location and sets the encoding to prevent corruption
+    file = open(root.file_path, encoding="utf8") #opens file from location and sets the encoding to prevent corruption
     txt_file = ((str(file)[-41:-31]).replace("_","/")) #strips the date out of the file string
     #set_date(txt_file)
     convert_txt_to_csv(file)
@@ -41,7 +46,7 @@ def set_date(date):
 '''
 
 def convert_txt_to_csv(file):
-    if exists("D:\Projects\Python\data_conversion\DSC.csv"):
+    if exists("D:\Projects\Python\data_conversion\data\DSC.csv"):
         pass
         fix_file_format()
     else:
@@ -85,12 +90,13 @@ def fix_file_format():
    
 
     
-    
+label = Label(root, text = "Click the button to brows the file", font = "Arial 15 bold")
+label.pack(pady = 20)    
 
-window = Tk()
-button = Button(text="Open", command=open_file)
-button.pack()
-window.mainloop()
+
+button = ttk.Button(root, text="Open", command=open_file)
+button.pack(pady = 5)
+root.mainloop()
 
 #convert_txt_to_csv()
 
