@@ -12,6 +12,11 @@ root.geometry("700x350")
 
 style=ttk.Style(root)
 
+label = Label(root, text = "Click the button to browse the file", font = "Arial 15 bold")
+label.pack(pady = 20)
+
+
+
 file_path = "D:\Projects\Python\data_conversion"
 
 day_of_week = ["Monday",
@@ -26,16 +31,16 @@ date = []
 
 def open_file():
     #open file from location selected
-    file_path = filedialog.askopenfilename(initialdir="D:\Projects\Python\data_conversion\data",
+    file = filedialog.askopenfilename(initialdir="D:\Projects\Python\data_conversion\data",
                                         title="Select a file", 
                                         filetypes=[("Text files","*.txt"), ("All files", "*.*")])
     ### original open filed
-    file = open(root.file_path, encoding="utf8") #opens file from location and sets the encoding to prevent corruption
-    txt_file = ((str(file)[-41:-31]).replace("_","/")) #strips the date out of the file string
+    f = open(file, encoding="utf8") #opens file from location and sets the encoding to prevent corruption
+    txt_file = ((str(f)[-41:-31]).replace("_","/")) #strips the date out of the file string
     #set_date(txt_file)
-    convert_txt_to_csv(file)
+    convert_txt_to_csv(f)
     print(txt_file)
-    file.close()    
+    f.close()    
 
 '''
 def set_date(date):
@@ -86,16 +91,10 @@ def fix_file_format():
     #print(list_new[0])
     #print(data[0][:3][0][6:])
     
-
-   
-
-    
-label = Label(root, text = "Click the button to brows the file", font = "Arial 15 bold")
-label.pack(pady = 20)    
-
-
+ 
 button = ttk.Button(root, text="Open", command=open_file)
 button.pack(pady = 5)
+
 root.mainloop()
 
 #convert_txt_to_csv()
