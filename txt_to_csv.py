@@ -75,21 +75,6 @@ def convert_txt_to_csv(file, date_):
         dataframe1.to_csv('data\DSC-' + str(date_)  + '.csv', index = False)
         fix_file_format(date_)
 
-#test
-def convert_txt_to_csv_2(file):
-    date_ = date_strip()
-    if exists(file_path + "\DSC-"+date_+".csv"):
-        if debug_mode == True:
-            os.remove(file_path + "\DSC-"+date_+".csv")
-            pass
-        fix_file_format(date_)
-        # overwrite file with new data
-    else:
-        dataframe1 = pd.read_csv(file)
-        print(dataframe1)
-        dataframe1.to_csv('data\DSC-' + str(date_)  + '.csv', index = False)
-        fix_file_format(date_)
-
 
 def fix_file_format(date_):
     data = []
@@ -106,24 +91,27 @@ def fix_file_format(date_):
         split_first = list(d[0].split(" "))
         second_ = d[1].strip() 
         thrid_ = (d[2].strip()).split(": ")
-        
-        
-        
+
         #splits the first entry int 3 seperate entrys, first name, last name, day
         for l in split_first: 
             new_list.append(l)
-                
+     
         new_list.append(second_) #handles the date and removes the spaces
-        #print(second_)
+
         for l in thrid_:
             new_list.append(l)#handlees the status and removes the spaces
-        #print(thrid_)
 
         list_new.append(new_list)
+    
     #take 5 entries and put them in a list
     #append list with missing data (days of week and dates)
     #add OFF as the last item 
-    print(list_new)
+        
+    #print(count)
+    #print(temp_list)
+    #print(date_list)
+    #print(list_new[:5])
+
  
 button = ttk.Button(root, text="Open", command=open_file)
 button.pack(pady = 5)
