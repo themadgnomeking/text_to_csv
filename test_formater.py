@@ -37,7 +37,6 @@ for f in range(int(len(data)/5)):
         
         
     print(temp_list)
-    print(cmp(temp_list[2],day_of_week))
     #print(len(temp_list))
     list_count+=5
 

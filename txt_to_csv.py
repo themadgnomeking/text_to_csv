@@ -108,21 +108,67 @@ def add_data_to_list(list):
         # enumerate through the groups of 5 entries
         # verify all days/dates are in (shoudl be a total lenght of 7
         if count == lst_loc:
-            if tl[2] == "Wednesday":
-                pass
-            else:
-                #tmp_list.append(tl)
-                pass
+            if tl[2] == "Monday":
+                tmp_list.append(tl)
+            elif tl[2] == "Tuesday":
+                tmp_list.append([tl[0], tl[1], "Monday", date_list[0], tl[4], "OFF"])
+                tmp_list.append(tl)
+            elif tl[2] == "Wednesday":
+                tmp_list.append([tl[0], tl[1], "Monday", date_list[0], tl[4], "OFF"])
+                tmp_list.append([tl[0], tl[1], "Tuesday", date_list[1], tl[4], "OFF"])
+                tmp_list.append(tl)
+            print(count == lst_loc)
         if count == lst_loc + 1:
             if tl[2] == "Tuesday":
-                tmp_list.append([tl[0], tl[1], "Monday", date_list[0], tl[4], "OFF"])
-        else:
+                tmp_list.append(tl)
+            elif tl[2] == "Wednesday":
+                tmp_list.append([tl[0], tl[1], "Tuesday", date_list[1], tl[4], "OFF"])
+                tmp_list.append(tl)
+            elif tl[2] == "Thursday":
+                tmp_list.append([tl[0], tl[1], "Tuesday", date_list[1], tl[4], "OFF"])
+                tmp_list.append([tl[0], tl[1], "Wednesday", date_list[2], tl[4], "OFF"])
+                tmp_list.append(tl)
+        if count == lst_loc + 2:
+            if tl[2] == "Wednesday":
+                tmp_list.append(tl)
+            elif tl[2] == "Thursday":
+                tmp_list.append([tl[0], tl[1], "Wednesday", date_list[2], tl[4], "OFF"])
+                tmp_list.append(tl)
+            elif tl[2] == "Friday":
+                tmp_list.append([tl[0], tl[1], "Wednesday", date_list[2], tl[4], "OFF"])
+                tmp_list.append([tl[0], tl[1], "Thursday", date_list[3], tl[4], "OFF"])
+                tmp_list.append(tl)
+        #needs to be workd one
+        if count == lst_loc + 3:
+            if tl[2] == "Thursday":
+                tmp_list.append(tl)
+            elif tl[2] == "Friday":
+                tmp_list.append([tl[0], tl[1], "Thursday", date_list[3], tl[4], "OFF"])
+                tmp_list.append(tl)
+            elif tl[2] == "Saturday":
+                tmp_list.append([tl[0], tl[1], "Thursday", date_list[3], tl[4], "OFF"])
+                tmp_list.append([tl[0], tl[1], "Friday", date_list[4], tl[4], "OFF"])
+                tmp_list.append(tl)
+        #needs to be worked on
+        if count == lst_loc + 4:
+            if tl[2] == "Friday":
+                tmp_list.append(tl)
+                tmp_list.append([tl[0], tl[1], "Saturday", date_list[5], tl[4], "OFF"])
+                tmp_list.append([tl[0], tl[1], "Sunday", date_list[6], tl[4], "OFF"])
+            elif tl[2] == "Saturday":
+                tmp_list.append([tl[0], tl[1], "Friday", date_list[4], tl[4], "OFF"])
+                tmp_list.append(tl)
+            elif tl[2] == "Sunday":
+                tmp_list.append([tl[0], tl[1], "Friday", date_list[4], tl[4], "OFF"])
+                tmp_list.append([tl[0], tl[1], "Saturday", date_list[5], tl[4], "OFF"])
+                tmp_list.append(tl)
             #tmp_list += tl
-            pass
+            
         # Add to a temporary list
         # sort list 
         # add to main list to be converted
         #print(lst_loc)
+        #print(tmp_list)
         """
         #print(count)
         if count == 0:
@@ -174,7 +220,7 @@ def add_data_to_list(list):
             
                 
             #print(count, tl)"""
-    #print(tmp_list)
+    print(tmp_list)
     #print(enumerate(list))
 
     
