@@ -21,7 +21,7 @@ day_of_week = ["Monday",
 #print(data[:5])
 #print(len(data))
 
-target = len(data)
+"""target = len(data)
 list_count = 5
 
 end_list = []
@@ -40,10 +40,21 @@ for f in range(int(len(data)/5)):
     #print(len(temp_list))
     list_count+=5
 
-    pass
+    pass"""
 
 
 
 """def add_missing_data(list):
     print(list)
     pass"""
+
+
+def matchEle():
+    A = [5, 4, 9, 12, 23, 31]
+    B = [4, 12, 31, 33]
+    for i in A:
+        for j in B:
+            if i == j:
+                print(i)
+
+matchEle()
