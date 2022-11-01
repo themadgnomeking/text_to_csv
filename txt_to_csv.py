@@ -32,8 +32,9 @@ day_of_week = ["Monday",
                "Saturday",
                "Sunday"]
 
-
 date_list = []
+
+final_list = []
 
 def open_file():
     #open file from location selected
@@ -100,18 +101,17 @@ def fix_file_format(date_):
 
 
 def add_data_to_list(list_input):
-    
-    lst_loc = 5
+    global final_list
     tmp_list = []
-    #incom_lst = list[lst_loc-5:lst_loc]
-    
+    lst_count = 0
+
     # save entries 5 at a time into a separate list
     for tl in list_input:
-        if len(tmp_list) < lst_loc:
+        if len(tmp_list) < 5:
             tmp_list.append(tl)
     # compare the 3rd position in each entry to day of week variable - sorts in order
     for count, tl in enumerate(tmp_list):
-        if len(tmp_list) < lst_loc + 2:
+        if len(tmp_list) < 7:
             # if missing any day add new data in format [first, last, "day of week", "date of day", schedule, "OFF"]
             if day_of_week[count] != tl[2]:
                 tmp_list.append([tl[0], tl[1], day_of_week[count], date_list[count], tl[4], "OFF"])
@@ -119,8 +119,13 @@ def add_data_to_list(list_input):
                 pass
 
     tmp_list.sort(key=itemgetter(3))
-    print(tmp_list)
- 
+    final_list += tmp_list
+    #print(final_list)
+    tmp_list = []
+   #print(final_list)
+
+    #print(tmp_list)
+print(final_list)
 button = ttk.Button(root, text="Open", command=open_file)
 button.pack(pady = 5)
 
