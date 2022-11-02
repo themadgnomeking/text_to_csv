@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import ttk
 from curses import window
+from typing import final
 import pandas as pd
 from os.path import exists
 import csv, datetime
@@ -101,31 +102,35 @@ def fix_file_format(date_):
 
 
 def add_data_to_list(list_input):
-    global final_list
+    final_list = []
     tmp_list = []
-    lst_count = 0
+    lst_count = 5
 
     # save entries 5 at a time into a separate list
-    for tl in list_input:
+    for tl in list_input[(lst_count - 5):lst_count]:
+        #print(len(tmp_list))
         if len(tmp_list) < 5:
             tmp_list.append(tl)
+        
+
     # compare the 3rd position in each entry to day of week variable - sorts in order
     for count, tl in enumerate(tmp_list):
+        #print(len(tmp_list))
         if len(tmp_list) < 7:
             # if missing any day add new data in format [first, last, "day of week", "date of day", schedule, "OFF"]
             if day_of_week[count] != tl[2]:
                 tmp_list.append([tl[0], tl[1], day_of_week[count], date_list[count], tl[4], "OFF"])
             else:
                 pass
-
-    tmp_list.sort(key=itemgetter(3))
-    final_list += tmp_list
-    #print(final_list)
-    tmp_list = []
-   #print(final_list)
-
-    #print(tmp_list)
-print(final_list)
+        if len(tmp_list) == 7: # once the list gets to 7 sort and add a space
+            tmp_list.sort(key=itemgetter(3))
+            tmp_list.append([])
+            final_list += tmp_list
+    lst_count += 5
+    tmp_list.clear()
+    print(final_list)
+    
+#print(final_list)
 button = ttk.Button(root, text="Open", command=open_file)
 button.pack(pady = 5)
 
