@@ -105,32 +105,47 @@ def add_data_to_list(list_input):
     final_list = []
     tmp_list = []
     lst_count = 5
-
+    while lst_count < len(list_input):
     # save entries 5 at a time into a separate list
-    for tl in list_input[(lst_count - 5):lst_count]:
-        #print(len(tmp_list))
-        if len(tmp_list) < 5:
-            tmp_list.append(tl)
-        
+        for tl in list_input[(lst_count - 5):lst_count]:
+            if len(tmp_list) < 5:
+                tmp_list.append(tl)
 
-    # compare the 3rd position in each entry to day of week variable - sorts in order
-    for count, tl in enumerate(tmp_list):
-        #print(len(tmp_list))
-        if len(tmp_list) < 7:
-            # if missing any day add new data in format [first, last, "day of week", "date of day", schedule, "OFF"]
-            if day_of_week[count] != tl[2]:
-                tmp_list.append([tl[0], tl[1], day_of_week[count], date_list[count], tl[4], "OFF"])
-            else:
-                pass
-        if len(tmp_list) == 7: # once the list gets to 7 sort and add a space
-            tmp_list.sort(key=itemgetter(3))
-            tmp_list.append([])
-            final_list += tmp_list
-    lst_count += 5
-    tmp_list.clear()
-    print(final_list)
-    
-#print(final_list)
+        # compare the 3rd position in each entry to day of week variable - sorts in order
+        temp_count = 0
+        for count, tl in enumerate(tmp_list):
+            #print(len(tmp_list))
+            
+            if len(tmp_list) < 7:
+                
+                if day_of_week[count] != tl[2]:
+                    if day_of_week[count] == tmp_list[count-1][2]:
+                        temp_count += 1
+                        tmp_list += [[tl[0], tl[1], day_of_week[count + temp_count], date_list[count], tl[4], "OFF"]]
+                        print(f"the current count - 1 is: {tmp_list[count - 1]}, the current day_of_week[count] is {day_of_week[count]}")
+                        print([[tl[0], tl[1], day_of_week[count + temp_count], date_list[count], tl[4], "OFF"]])
+                        print(temp_count)
+                        pass
+                    else:
+                        tmp_list += [[tl[0], tl[1], day_of_week[count], date_list[count], tl[4], "OFF"]]
+                        pass
+                elif day_of_week[count] == 5:
+                    tmp_list += [[tl[0], tl[1], "Saturday", date_list[5], tl[4], "OFF"]]
+                    if len(tmp_list) == 7:
+                        temp_count = 0
+                elif day_of_week[count] == 6:
+                    tmp_list += [[tl[0], tl[1], "Sunday", date_list[6], tl[4], "OFF"]]
+                    temp_count = 0
+                    pass
+            if len(tmp_list) == 7: # once the list gets to 7 sort and add a space
+                tmp_list.sort(key=itemgetter(3))
+                tmp_list.append([])
+                final_list += tmp_list
+                #final_list.append([])
+        lst_count += 5
+        tmp_list.clear()
+    #print(final_list[:80])
+
 button = ttk.Button(root, text="Open", command=open_file)
 button.pack(pady = 5)
 
